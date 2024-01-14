@@ -1,16 +1,18 @@
 import { useState } from 'react';
-const AddTask = ({ setTasks }) => {
+import {useDispatch} from 'react-redux'
+import { addtask } from './redux/Action';
+const AddTask = () => {
   const [text, setText] = useState('');
-
+const dispatch=useDispatch()
   const onTextChanged = event => setText(event.target.value);
 
-  const onAddClicked = event => {
+  const onAddClicked = () => {
     if (text === '') {
       alert('Please Enter a Task Name');
     } else {
       const newTask = { id: Date.now(), taskName: text, isDone: false };
       console.log(newTask);
-      setTasks(prev => [...prev, newTask]);
+      dispatch(addtask(newTask))
       setText('');
     }
   };

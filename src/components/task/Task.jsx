@@ -1,24 +1,17 @@
 import React from 'react';
-
-const Task = ({ task, setTasks }) => {
+import {useDispatch} from 'react-redux'
+import { deletetask, edittask } from './redux/Action';
+const Task = ({ task }) => {
   const { id, taskName, isDone } = task;
+const dispatch=useDispatch()
 
-  const onComplete = event =>
-    setTasks(prev =>
-      prev.map(element =>
-        element.id === id ? { ...element, isDone: !element.isDone } : element
-      )
-    );
-
-  const onDelete = event =>
-    setTasks(prev => prev.filter(element => element.id !== id));
 
   return (
     <li>
-      <span className={isDone === true ? 'completed' : ''} onClick={onComplete}>
+      <span className={isDone === true ? 'completed' : ''} onClick={()=>dispatch(edittask(id,{id,taskName,isDone:!isDone}))}>
         {taskName}
       </span>
-      <i className="fa-solid fa-trash-can" onClick={onDelete}></i>
+      <i className="fa-solid fa-trash-can" onClick={()=>dispatch(deletetask(id))} ></i>
     </li>
   );
 };

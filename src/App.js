@@ -1,19 +1,17 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import Header from './components/task/Header';
 import TaskList from './components/task/TaskList';
+import { useState } from 'react';
 
 function App() {
-  const [tasks, setTasks] = useState([
-    { id: 1, taskName: 'learn react', isDone: false },
-    { id: 2, taskName: 'learn react hooks', isDone: true },
-  ]);
+  const[isComplete,setIsComplete]=useState(false)
   return (
     <Fragment>
       {/* Header Section */}
-      <Header setTasks={setTasks} />
+      <Header setIsComplete={setIsComplete} />
 
       {/* TaskList Section */}
-      <TaskList todos={tasks} setTasks={setTasks} />
+      <TaskList isComplete={isComplete} />
     </Fragment>
   );
 }
